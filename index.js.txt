@@ -1,0 +1,19 @@
+const mineflayer = require('mineflayer');
+
+const bot = mineflayer.createBot({
+  host: 'ip.server.cua.ban',  // IP server Minecraft
+  port: 25565,                // Port (mặc định 25565)
+  username: 'TênBot',         // Tên bot (offline) hoặc email (premium)
+  // password: 'MậtKhẩu'       // Bỏ comment nếu là account premium
+});
+
+bot.on('login', () => console.log('✅ Bot đã đăng nhập'));
+bot.on('spawn', () => console.log('🎉 Bot đã spawn trong server'));
+bot.on('kicked', console.log);
+bot.on('error', console.log);
+
+// chống AFK: nhảy nhẹ mỗi 10 giây
+setInterval(() => {
+  bot.setControlState('jump', true);
+  setTimeout(() => bot.setControlState('jump', false), 500);
+}, 10000);
